@@ -1,0 +1,68 @@
+<div class="container">
+<form name="loginForm" #lgForm="ngForm">
+<!-- add input type textbox with required attribute -->
+<input type="text" class="form-control" id="username" name="username" [(ngModel)]="userName"   required #uName="ngModel">
+
+<!-- div tag to display error message if the user not entered the name wiht bootstrap styles -->
+<div>
+    {{uName.errors | json}}
+    uName.pristine : {{uName.pristine}}
+    uName.dirty : {{uName.dirty}}
+    uName.valid : {{uName.valid}}
+    uName.invalid : {{uName.invalid}}
+    uName.touched : {{uName.touched}}
+    uName.untouched : {{uName.untouched}}
+    uName.errors : {{uName.errors | json}}
+
+</div>
+<!-- display div tag to show error message if the uName contains errors -->
+<div *ngIf="uName.errors?.['required'] && uName.touched"  class="alert alert-danger">
+    Username is required'</div>
+
+    <!-- define text box with pattern for credit card number -->
+    <input type="text" class="form-control" id="creditCard" name="creditCard" [(ngModel)]="creditCard"   required #cCard="ngModel" pattern="[0-9]{16}" (onblur)="validate()">
+    <div *ngIf="cCard.errors?.['required'] && cCard.touched"  class="alert alert-danger">
+    Credit Card is required'</div>
+    <div *ngIf="cCard.errors?.['pattern'] && cCard.touched"  class="alert alert-danger">
+    Credit Card should be 16 digits'</div>
+
+    <div>
+    {{cCard.errors | json}}
+    cCard.pristine : {{cCard.pristine}}
+    cCard.dirty : {{cCard.dirty}}
+    cCard.valid : {{cCard.valid}}
+    cCard.invalid : {{cCard.invalid}}
+    cCard.touched : {{cCard.touched}}
+    cCard.untouched : {{cCard.untouched}}
+    cCard.errors : {{cCard.errors | json}}
+        
+    </div>
+
+
+
+
+<!-- <div *ngIf="">
+
+</div> -->
+
+<!-- <div   *ngIf="uName.errors?['required']"  class="alert alert-danger">
+    Username is required'</div> -->
+
+    
+
+    <button type="button" (click)="login(uName)" [disabled]="!lgForm.valid">login</button>
+
+    <div>
+    {{lgForm.value | json}}
+     lgForm,=pristine : {{lgForm.pristine}}
+        lgForm,=dirty : {{lgForm.dirty}}
+        lgForm,=valid : {{lgForm.valid}}
+        lgForm,=invalid : {{lgForm.invalid}}
+        lgForm,=touched : {{lgForm.touched}}
+        lgForm,=untouched : {{lgForm.untouched}}
+        lgForm,=errors : {{lgForm.errors | json}}
+
+    </div>
+</form>
+
+</div>
