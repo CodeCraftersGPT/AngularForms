@@ -1,0 +1,64 @@
+<!-- <p>register works!</p> -->
+
+<!-- define username field with bootstrap styles inside form component -->
+
+<!-- Path: CCC_AngularForms/src/app/register/register.component.html -->
+
+<div class="container">
+    <form name="register" [formGroup]="registerForm">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-control" formControlName="userName" required>
+            <div  *ngIf="registerForm.get('userName')?.status == 'INVALID' && registerForm.get('userName')?.dirty  "  class="alert alert-danger" >
+                username is required
+            </div>
+            {{registerForm.get('userName')?.status}}
+            {{registerForm.get('userName')?.errors | json}}
+           dirty: {{registerForm.get('userName')?.dirty}}
+           touched: {{registerForm.get('userName')?.touched}}
+            {{registerForm.get('userName')?.errors?.['required']}}
+         
+
+        </div>
+       
+        <!-- define field for email with formCOntrol -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" class="form-control" formControlName="email">
+        </div>
+        <!-- define field for phone number with formControl -->
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" class="form-control" formControlName="phone">
+        </div>
+        <!-- define billingAddress formGroup with doorNumber,city,zip -->
+        <div formGroupName="billingAddress">
+            <div class="form-group">
+                <label for="doorNumber">Door Number</label>
+                <input type="text" id="doorNumber" name="doorNumber" class="form-control" formControlName="doorNumber">
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" class="form-control" formControlName="city">
+            </div>
+            <div class="form-group">
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" name="zip" class="form-control" formControlName="zip">
+                <div class="alert alert-danger" *ngIf="registerForm.get('billingAddress')?.get('zip')?.dirty && registerForm.get('billingAddress')?.get('zip')?.status == 'INVALID' && registerForm.get('billingAddress')?.get('zip')?.hasError('required')">
+                    zip is required
+                </div>
+                <div class="alert alert-danger" *ngIf="registerForm.get('billingAddress')?.get('zip')?.dirty && registerForm.get('billingAddress')?.get('zip')?.status == 'INVALID' && registerForm.get('billingAddress')?.get('zip')?.hasError('pattern')">
+                    zip should be 6 digits
+                </div>
+
+            </div>
+        </div>
+      
+            <div>
+                value : {{registerForm.value | json}}
+            </div>
+        <!-- define register button with onclick register handler -->
+        <button type="button" class="btn btn-primary" (click)="register()" [disabled]="!registerForm.valid">Register</button>
+    </form>
+
+</div>
