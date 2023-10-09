@@ -1,0 +1,14 @@
+
+input#username.ng-valid[required] {
+    /* Your CSS styles here */
+    border-left: 5px solid #42A948; /* green */
+}
+
+
+
+input#username.ng-invalid[required] {
+    /* Your CSS styles here */
+    border-left: 5px solid #a94442; /* red */
+}
+
+/* for above username validation if required attribute exists want to define the css class */
